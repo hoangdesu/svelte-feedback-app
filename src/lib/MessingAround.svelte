@@ -1,4 +1,8 @@
 <script>
+  import "./messing-around.css";
+  import './Counter.svelte'
+  import Template from "./Template.svelte";
+
   let firstName = "Brian";
   let lastName = "Nguyen";
   let color = "yellow";
@@ -16,6 +20,7 @@
 
   // conditional
   let showText = false;
+  let showTemplate = false;
 
   // loops
   let myNames = [
@@ -52,6 +57,8 @@
   let count = 0;
   let doubleNOreactive = count * 2;
   $: doubleREACTIVE = count * 2;
+
+  
 </script>
 
 <div>
@@ -88,6 +95,18 @@
   <p>REACTIVE double = {doubleREACTIVE}</p>
   <p>NO reactive double = {doubleNOreactive}</p>
   <button on:click={() => count++}>Increase count value</button>
-  <p>This button only increases the value of "count", and value of "double" depends on "count"</p>
-ialzied<p>The value of REACTIVE double will change with count. The other one stays after being initialzied</p>
+  <p>
+    This button only increases the value of "count", and value of "double"
+    depends on "count"
+  </p>
+  <p>
+    The value of REACTIVE double will change with count. The other one stays
+    after being initialized
+  </p>
+
+  <button on:click={() => {showTemplate = !showTemplate}}>{showTemplate ? 'Hide' : 'Show'} template component</button>
+  {#if showTemplate}
+    <Template />
+  {/if}
+
 </div>
