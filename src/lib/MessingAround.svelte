@@ -14,7 +14,38 @@
     };
 
     // conditional
-    $: showText = false;
+    let showText = false;
+
+    // loops
+    let myNames = [
+        {
+            id: 1,
+            name: 'Cún'
+        },
+        {
+            id: 2,
+            name: 'Hoàng'
+        },
+        {
+            id: 3,
+            name: 'Brian'
+        },
+        {
+            id: 4,
+            name: 'Doroke'
+        }
+    ];
+
+    const addNewName = () => {
+        const newName = {
+            id: Math.floor(Math.random() * 100) + 1,
+            name: 'new user'
+        }
+        
+        // myNames.push(newName) // => NOT GONNA WORK
+        // cannot use push(), has to create a new array object
+        myNames = [...myNames, newName];
+    }
 
 </script>
 
@@ -31,5 +62,14 @@
     {:else}
         <p>;)</p>
     {/if}
+
+    <h3>My names:</h3>
+    <button on:click={addNewName}>Add new name</button>
+
+    <!-- loops -->
+    <!-- {#each expression as varName (key)}...{/each} -->
+    {#each myNames as name (name.id)}
+        <p>{name.id}. {name.name}</p>
+    {/each}
 
 </div>
