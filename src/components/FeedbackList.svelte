@@ -4,8 +4,8 @@
   export let feedback = [];
 </script>
 
-<h1>FeedbackList</h1>
+<!-- <h1>FeedbackList</h1> -->
 
 {#each feedback as fb (fb.id)}
-  <FeedbackItem>hi</FeedbackItem>
+  <FeedbackItem item={fb} />
 {/each}
