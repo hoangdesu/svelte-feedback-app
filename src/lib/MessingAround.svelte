@@ -58,9 +58,9 @@
   let doubleNOreactive = count * 2;
   $: doubleREACTIVE = count * 2;
 
-  
 </script>
 
+<!-- *** MARKUP *** -->
 <div>
   <h1 style="color: {color}">Hello {name}!</h1>
   <button on:click={toggle}>Toggle color</button>
