@@ -12,7 +12,7 @@
   const onDeleteHandler = (itemId) => {
     // dispatch: (type: EventKey, detail?: any, options?: DispatchOptions) => boolean
     // dispatch/expose a custom event name so the parent component can catch and forward up
-    dispatch('delete-feedback', itemId);
+    dispatch("delete-feedback", itemId);
   };
 </script>
 

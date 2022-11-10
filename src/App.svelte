@@ -12,7 +12,7 @@
     },
     {
       id: 2,
-      rating: 6,
+      rating: 5,
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quam dolorem rem laudantium ad sequi dignissimos!'
     },
     {
@@ -33,6 +33,10 @@
 
   ]
 
+  // using reactive value, to react to the change of list length
+  $: totalFeedback = feedback.length;
+  $: average = feedback.reduce((avg, fb) => (avg + fb.rating), 0) / totalFeedback;
+
   const onDeleteFeedbackHandler = (e) => {
     // get a param "event" object (e)
     // can access data from this event object from property "detail" => e.detail (= itemId passed from FeedbackItem)
@@ -48,6 +52,7 @@
   <!-- <MessingAround /> -->
 
 <main class="container">
+  {totalFeedback} - {average}
   <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
 </main>
 
