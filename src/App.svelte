@@ -2,6 +2,7 @@
 
   // import MessingAround from "./lib/MessingAround.svelte";
   import FeedbackList from './components/FeedbackList.svelte';
+  import FeedbackStats from './components/UI/FeedbackStats.svelte';
   import './style.css';
 
   let feedback = [
@@ -33,10 +34,6 @@
 
   ]
 
-  // using reactive value, to react to the change of list length
-  $: totalFeedback = feedback.length;
-  $: average = feedback.reduce((avg, fb) => (avg + fb.rating), 0) / totalFeedback;
-
   const onDeleteFeedbackHandler = (e) => {
     // get a param "event" object (e)
     // can access data from this event object from property "detail" => e.detail (= itemId passed from FeedbackItem)
@@ -48,11 +45,10 @@
 </script>
 
 
-
   <!-- <MessingAround /> -->
 
 <main class="container">
-  {totalFeedback} - {average}
+  <FeedbackStats {feedback} />
   <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
 </main>
 
