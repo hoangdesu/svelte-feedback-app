@@ -2,10 +2,6 @@
     <slot />
 </div>
 
-<!-- 
-    - <slot> is like children prop in React, allow passing data between component
- -->
-
 <style>
     .card {
         background-color: #fffffd;

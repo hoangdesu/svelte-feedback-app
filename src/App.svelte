@@ -24,16 +24,31 @@
       id: 4,
       rating: 7,
       content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, recusandae quae facilis ab illo inventore fugit aliquid quam nemo veritatis est asperiores praesentium quaerat assumenda. Fugiat accusantium tenetur id aspernatur.'
-    }
+    },
+    {
+      id: 5,
+      rating: 9,
+      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi libero corrupti nulla.'
+    },
+
   ]
 
+  const onDeleteFeedbackHandler = (e) => {
+    // get a param "event" object (e)
+    // can access data from this event object from property "detail" => e.detail (= itemId passed from FeedbackItem)
+
+      const itemId = e.detail;
+      feedback = feedback.filter(fb => fb.id !== itemId); // filter out (or remove) element that matches the ID
+  }
+
 </script>
+
 
 
   <!-- <MessingAround /> -->
 
 <main class="container">
-  <FeedbackList {feedback} />
+  <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
 </main>
 
 
@@ -42,6 +57,7 @@
 <!-- 
 
   - if prop name == value, can simplify with this syntax {propname}
+  - handle delete-feedback event here
 
  -->
 
