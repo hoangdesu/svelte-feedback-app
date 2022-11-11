@@ -15,9 +15,9 @@
   };
 
   const onRatingChangeHandler = (evt) => {
-    // rating = parseInt(evt.detail);
-    rating = +evt.detail; // int to str: can use this syntax +str => int
-    console.log(rating);
+    rating = parseInt(evt.detail);
+    // rating = +evt.detail; // int to str: can use this syntax +str => int
+    // console.log(rating);
   };
 
   const dispatch = createEventDispatcher();
