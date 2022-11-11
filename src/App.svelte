@@ -3,6 +3,7 @@
   // import MessingAround from "./lib/MessingAround.svelte";
   import FeedbackList from './components/FeedbackList.svelte';
   import FeedbackStats from './components/UI/FeedbackStats.svelte';
+  import FeedbackForm from './components/FeedbackForm.svelte';
   import './style.css';
 
   let feedback = [
@@ -48,6 +49,7 @@
   <!-- <MessingAround /> -->
 
 <main class="container">
+  <FeedbackForm />
   <FeedbackStats {feedback} />
   <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
 </main>
