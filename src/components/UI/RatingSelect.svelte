@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
   const numList = [];
   for (let i = 1; i <= 10; i++) {
     numList.push(i);
@@ -6,8 +8,14 @@
 
   let selected = 10;
 
-  const onChangeHandler = (num) => {
-    selected = num;
+  const dispatch = createEventDispatcher();
+
+  const onChangeHandler = (e) => {
+    selected = e.currentTarget.value; // extract current input value from event object
+    dispatch('on-rating-change', selected);
+    
+    // reset rating (doesnt't update UI, need to re-render component based on state change)
+    selected = 10;
   };
   
 </script>
@@ -20,7 +28,7 @@
         id={`num${num}`}
         name="rating"
         value={num}
-        on:change={() => onChangeHandler(num)}
+        on:change={onChangeHandler}
         checked={num === selected}
       />
       <label for={`num${num}`}>{num}</label>

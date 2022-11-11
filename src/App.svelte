@@ -35,6 +35,8 @@
 
   ]
 
+  let currentId = 6;
+
   const onDeleteFeedbackHandler = (e) => {
     // get a param "event" object (e)
     // can access data from this event object from property "detail" => e.detail (= itemId passed from FeedbackItem)
@@ -43,22 +45,27 @@
       feedback = feedback.filter(fb => fb.id !== itemId); // filter out (or remove) element that matches the ID
   }
 
+  const onFormSubmitHandler = e => {
+    const newFeedback = {id: currentId, ...e.detail};
+    feedback = [newFeedback, ...feedback];
+    ++currentId;
+    // console.log(feedback);
+  }
+
 </script>
 
 
-  <!-- <MessingAround /> -->
-
 <main class="container">
-  <FeedbackForm />
+  <FeedbackForm on:on-form-submit={onFormSubmitHandler} />
   <FeedbackStats {feedback} />
   <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
 </main>
 
 
 
-
+  <!-- <MessingAround /> -->
 <!-- 
-
+NOTES:
   - if prop name == value, can simplify with this syntax {propname}
   - handle delete-feedback event here
 

@@ -1,29 +1,57 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   import Button from "./UI/Button.svelte";
   import Card from "./UI/Card.svelte";
-    import RatingSelect from './UI/RatingSelect.svelte';
+  import RatingSelect from "./UI/RatingSelect.svelte";
 
   let review = "";
   let isDisabled = true;
-
-  const clickHandler = (e) => {
-    e.preventDefault();
-    console.log("input:", review);
-    review = "";
-  };
+  let rating = 10;
+  let errorMsg = "";
 
   const onInputChangeHandler = (evt) => {
     review.trim().length > 0 ? (isDisabled = false) : (isDisabled = true);
   };
-</script>
 
+  const onRatingChangeHandler = (evt) => {
+    // rating = parseInt(evt.detail);
+    rating = +evt.detail; // int to str: can use this syntax +str => int
+    console.log(rating);
+  };
+
+  const dispatch = createEventDispatcher();
+  const onFormSubmit = (e) => {
+    // e.preventDefault(); // not needed since already using event modifier
+
+    // error check: must have more than 10 words
+    if (review.trim().split(" ").length <= 10) {
+      errorMsg = "Your review is too short. Please write more than 10 words.";
+    } else {
+      errorMsg = "";
+
+      const feedback = {
+        rating: rating,
+        content: review,
+      };
+
+      //   console.log(feedback);
+      dispatch("on-form-submit", feedback);
+
+      // reset input
+      rating = 10;
+      review = "";
+      isDisabled = true;
+    }
+  };
+</script>
 
 <Card>
   <header>
     <h2>How would you rate our service?</h2>
   </header>
-  <form>
-    <RatingSelect />
+  <form on:submit|preventDefault={onFormSubmit}>
+    <RatingSelect on:on-rating-change={onRatingChangeHandler} />
     <div class="input-group">
       <input
         type="text"
@@ -33,10 +61,16 @@
       />
       <Button type="submit" style="secondary" {isDisabled}>Submit</Button>
     </div>
+    {#if errorMsg !== ""}
+      <p style="color: red;">{errorMsg}</p>
+    {/if}
   </form>
 </Card>
 
-
+<!-- 
+    - event modifier: DOM event handlers can have modifiers that alter their behaviour. For example, a handler with a once modifier will only run a single time:
+    - https://svelte.dev/tutorial/event-modifiers
+ -->
 <style>
   header {
     max-width: 400px;
