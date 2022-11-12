@@ -1,22 +1,26 @@
 <script>
   import Card from "../UI/Card.svelte";
-  import { createEventDispatcher } from "svelte";
   import { FeedbackStore } from "../../stores";
-  export let item; 
+  export let item;
 
   const onDeleteHandler = (itemId) => {
     // delete directly from the store
     FeedbackStore.update((currentValue) => {
       return currentValue.filter((fb) => fb.id !== itemId);
-    })
+    });
   };
+
+  export let showId = false;
 </script>
 
 <Card>
   <div class="num-display">{item.rating}</div>
   <button class="close-btn" on:click={() => onDeleteHandler(item.id)}>❌</button
   >
-  <div class="content">{item.content}</div>
+  {#if showId}
+    <div>[{item.id}]</div>
+  {/if}
+  <div class="content">"{item.content}"</div>
 </Card>
 
 <style>

@@ -28,4 +28,6 @@ export const FeedbackStore = writable([
  * readable(): create a new store only for reference, values cannot be written from outside
  * derived: create a store whose value is based on the value of one or more other stores
  * Custom store: as long as an object correctly implements the subscribe method, it's a store
+ * update(): update new value for the store based on the currentValue
+ * set(): set and inform subscriber
  */
