@@ -1,12 +1,12 @@
 <script>
-  export let feedback;
+  import { FeedbackStore } from '../../stores';
 
   // using reactive value, to react to the change of list length
-  $: totalFeedback = feedback.length;
-  $: average = feedback.reduce((avg, fb) => avg + fb.rating, 0) / totalFeedback;
+  $: totalFeedback = $FeedbackStore.length;
+  $: average = $FeedbackStore.reduce((avg, fb) => avg + fb.rating, 0) / totalFeedback;
 </script>
 
-<h1>Feedback from App</h1>
+<h1>Feedback from Stores</h1>
 <div class="feedback-stats">
   <h4>{totalFeedback} reviews</h4>
   <h4>Average rating: {average.toFixed(2)}</h4>

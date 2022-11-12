@@ -1,9 +1,16 @@
 <script>
-  // import MessingAround from "./lib/MessingAround.svelte";
+  // import MessingAround from "./lib/MessingAround.svelte"; // component for learning Svelte
+
+  import { AppStore } from "./stores";
+  import { onMount, onDestroy } from "svelte";
+
   import FeedbackList from "./components/FeedbackList.svelte";
   import FeedbackStats from "./components/UI/FeedbackStats.svelte";
   import FeedbackForm from "./components/FeedbackForm.svelte";
   import "./style.css";
+  import StoresFeedbackForm from "./components/StoresComponents/StoresFeedbackForm.svelte";
+  import StoresFeedbackList from "./components/StoresComponents/StoresFeedbackList.svelte";
+  import StoresFeedbackStats from "./components/StoresComponents/StoresFeedbackStats.svelte";
 
   let feedback = [
     {
@@ -55,18 +62,31 @@
   };
 
   let activeApp = "event-dispatcher";
-  activeApp = "stores;"
-  
+
+  const unsubscribeAppStore = AppStore.subscribe(
+    (data) => (activeApp = data.activeApp)
+  );
+
+  // using component life cycle
+  onMount(() => {
+    console.log("component App mounted");
+  });
+
+  onDestroy(() => {
+    unsubscribeAppStore();
+  });
+
   const appSelectHandler = (e) => {
-    activeApp = e.currentTarget.value; 
-    console.log(activeApp);
-  }
+    AppStore.update((currentState) => {
+      return { ...currentState, activeApp: e.currentTarget.value };
+    });
+    activeApp = $AppStore.activeApp;
+    console.log('active app:', activeApp);
+  };
 </script>
 
 <main class="container">
   <div class="app-selector">
-    <!-- <button>Use event dispatcher</button>
-    <button>Use Store</button> -->
     <ul>
       <li>
         <input
@@ -92,10 +112,16 @@
       </li>
     </ul>
   </div>
-  <FeedbackForm on:on-form-submit={onFormSubmitHandler} />
 
-  <FeedbackStats {feedback} />
-  <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
+  {#if activeApp === "event-dispatcher"}
+    <FeedbackForm on:on-form-submit={onFormSubmitHandler} />
+    <FeedbackStats {feedback} />
+    <FeedbackList {feedback} on:delete-feedback={onDeleteFeedbackHandler} />
+  {:else if activeApp === "stores"}
+    <StoresFeedbackForm />
+    <StoresFeedbackStats />
+    <StoresFeedbackList />
+  {/if}
 </main>
 
 <!-- <MessingAround /> -->
