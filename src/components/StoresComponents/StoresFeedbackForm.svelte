@@ -6,8 +6,7 @@
   import RatingSelect from "../UI/RatingSelect.svelte";
 
   import { FeedbackStore } from '../../stores';
-  import FeedbackForm from '../FeedbackForm.svelte';
-
+  
   let review = "";
   let isDisabled = true;
   let rating = 10;
@@ -105,11 +104,5 @@
 
   input:focus {
     outline: none;
-  }
-
-  .message {
-    padding-top: 10px;
-    text-align: center;
-    color: rebeccapurple;
   }
 </style>

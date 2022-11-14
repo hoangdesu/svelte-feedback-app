@@ -6,7 +6,7 @@
   $: average = feedback.reduce((avg, fb) => avg + fb.rating, 0) / totalFeedback;
 </script>
 
-<h1>Feedback from App</h1>
+<h2>Feedback from App</h2>
 <div class="feedback-stats">
   <h4>{totalFeedback} reviews</h4>
   <h4>Average rating: {average.toFixed(2)}</h4>

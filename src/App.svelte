@@ -16,13 +16,13 @@
     {
       id: 1,
       rating: 10,
-      content: "lorem ipsum 1",
+      content: "Svelte is actually an amazing and great frontend framework to use!",
     },
     {
       id: 2,
       rating: 5,
       content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quam dolorem rem laudantium ad sequi dignissimos!",
+        "I already started falling in love with it",
     },
     {
       id: 3,
@@ -86,6 +86,7 @@
 </script>
 
 <main class="container">
+  <h1 class="header">Svelte Feedback app</h1>
   <div class="app-selector">
     <ul>
       <li>
@@ -133,6 +134,11 @@ NOTES:
 
  -->
 <style>
+
+  .header {
+    margin: 50px;
+    text-align: center;
+  }
   .app-selector ul {
     display: flex;
     justify-content: space-around;
